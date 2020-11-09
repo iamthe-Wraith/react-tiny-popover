@@ -68,6 +68,7 @@ export interface PopoverProps {
   containerStyle?: Partial<CSSStyleDeclaration>;
   boundaryInset?: number;
   boundaryTolerance?: number;
+  transitionDuration?: number;
   onClickOutside?: (e: MouseEvent) => void;
 }
 
