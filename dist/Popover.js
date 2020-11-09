@@ -76,19 +76,21 @@ exports.Popover = react_1.forwardRef(function (_a, externalRef) {
         var shouldUpdatePopover = true;
         var updatePopover = function () {
             if (isOpen) {
-                var childRect = childRef.current.getBoundingClientRect();
-                var popoverRect = popoverRef.current.getBoundingClientRect();
-                if (!util_1.rectsAreEqual(childRect, {
-                    top: popoverState.childRect.top,
-                    left: popoverState.childRect.left,
-                    width: popoverState.childRect.width,
-                    height: popoverState.childRect.height,
-                    bottom: popoverState.childRect.top + popoverState.childRect.height,
-                    right: popoverState.childRect.left + popoverState.childRect.width,
-                }) ||
-                    popoverRect.width !== popoverState.popoverRect.width ||
-                    popoverRect.height !== popoverState.popoverRect.height) {
-                    positionPopover();
+                if (childRef.current) {
+                    var childRect = childRef.current.getBoundingClientRect();
+                    var popoverRect = popoverRef.current.getBoundingClientRect();
+                    if (!util_1.rectsAreEqual(childRect, {
+                        top: popoverState.childRect.top,
+                        left: popoverState.childRect.left,
+                        width: popoverState.childRect.width,
+                        height: popoverState.childRect.height,
+                        bottom: popoverState.childRect.top + popoverState.childRect.height,
+                        right: popoverState.childRect.left + popoverState.childRect.width,
+                    }) ||
+                        popoverRect.width !== popoverState.popoverRect.width ||
+                        popoverRect.height !== popoverState.popoverRect.height) {
+                        positionPopover();
+                    }
                 }
                 if (shouldUpdatePopover) {
                     window.requestAnimationFrame(updatePopover);
