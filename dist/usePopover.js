@@ -11,6 +11,7 @@ exports.usePopover = function (_a) {
         overflow: 'visible',
         top: '0px',
         left: '0px',
+        opacity: '0',
     });
     var positionPopover = react_1.useCallback(function (positionIndex, childRect, popoverRect, parentRect) {
         var _a;
@@ -35,6 +36,7 @@ exports.usePopover = function (_a) {
                 })
                 : contentLocation, top_1 = _b.top, left_1 = _b.left;
             popoverRef.current.style.transform = "translate(" + left_1 + "px, " + top_1 + "px)";
+            popoverRef.current.style.opacity = '1';
             onPositionPopover({
                 isPositioned: true,
                 childRect: childRect,
@@ -72,6 +74,7 @@ exports.usePopover = function (_a) {
             (_a = util_1.getNudgedPopoverRect(rect, parentRect, boundaryInset, boundaryTolerance), finalTop = _a.top, finalLeft = _a.left);
         }
         popoverRef.current.style.transform = "translate(" + finalLeft + "px, " + finalTop + "px)";
+        popoverRef.current.style.opacity = '1';
         onPositionPopover({
             isPositioned: true,
             childRect: childRect,
