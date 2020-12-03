@@ -75,29 +75,30 @@ exports.Popover = react_1.forwardRef(function (_a, externalRef) {
     react_1.useLayoutEffect(function () {
         var shouldUpdatePopover = true;
         var updatePopover = function () {
-            if (isOpen) {
-                if (childRef.current) {
-                    var childRect = childRef.current.getBoundingClientRect();
-                    var popoverRect = popoverRef.current.getBoundingClientRect();
-                    if (!util_1.rectsAreEqual(childRect, {
-                        top: popoverState.childRect.top,
-                        left: popoverState.childRect.left,
-                        width: popoverState.childRect.width,
-                        height: popoverState.childRect.height,
-                        bottom: popoverState.childRect.top + popoverState.childRect.height,
-                        right: popoverState.childRect.left + popoverState.childRect.width,
-                    }) ||
-                        popoverRect.width !== popoverState.popoverRect.width ||
-                        popoverRect.height !== popoverState.popoverRect.height) {
-                        positionPopover();
-                    }
-                }
-                if (shouldUpdatePopover) {
-                    window.requestAnimationFrame(updatePopover);
-                }
-            }
-            else {
+            if (!childRef.current)
+                return;
+            if (!popoverRef.current)
+                return;
+            if (!isOpen) {
                 setPopoverState(function (prev) { return (__assign(__assign({}, prev), { isPositioned: false })); });
+                return;
+            }
+            var childRect = childRef.current.getBoundingClientRect();
+            var popoverRect = popoverRef.current.getBoundingClientRect();
+            if (!util_1.rectsAreEqual(childRect, {
+                top: popoverState.childRect.top,
+                left: popoverState.childRect.left,
+                width: popoverState.childRect.width,
+                height: popoverState.childRect.height,
+                bottom: popoverState.childRect.top + popoverState.childRect.height,
+                right: popoverState.childRect.left + popoverState.childRect.width,
+            }) ||
+                popoverRect.width !== popoverState.popoverRect.width ||
+                popoverRect.height !== popoverState.popoverRect.height) {
+                positionPopover();
+            }
+            if (shouldUpdatePopover) {
+                window.requestAnimationFrame(updatePopover);
             }
         };
         window.requestAnimationFrame(updatePopover);
